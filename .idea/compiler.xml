@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="abstraction-code" />
+        <module name="hund-katze-maus-3-domain" />
+        <module name="hund-katze-maus-0-plugin-database" />
+        <module name="hund-katze-maus-1-adapters" />
+        <module name="hund-katze-maus-2-application" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
