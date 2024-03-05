@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="abstraction-code" />
         <module name="hund-katze-maus-3-domain" />
-        <module name="hund-katze-maus-0-plugin-database" />
-        <module name="hund-katze-maus-1-adapters" />
         <module name="hund-katze-maus-2-application" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hund-katze-maus-0-plugin-database" target="20" />
+      <module name="hund-katze-maus-1-adapters" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>
