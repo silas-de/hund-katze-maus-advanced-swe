@@ -1,5 +1,7 @@
 package org.example.hundkatzemaus.application;
 
+import java.util.Objects;
+
 public enum Modus {
     BELEGUNG_ANZEIGEN("Belegung der Räumlichkeiten anzeigen", new Argument[] { new FestesArgument("belegung", "b") }, ProgrammHilfe.instance ),
     BELEGUNG_ANZEIGEN_RAUM("Belegung einer Räumlichkeit anzeigen", new Argument[] { new FestesArgument("belegung", "b"), new EingabeArgument("Raumnummer") {
@@ -19,21 +21,13 @@ public enum Modus {
     private final Programm programm;
 
     Modus(String beschreibung, Argument[] argumente, Programm programm) {
-        if (beschreibung == null) {
-            throw new IllegalArgumentException("Beschreibung darf nicht null sein");
-        }
-        if (argumente == null) {
-            throw new IllegalArgumentException("Argumente dürfen nicht null sein");
-        }
-        this.beschreibung = beschreibung;
-        this.argumente = argumente;
-        this.programm = programm;
+        this.beschreibung = Objects.requireNonNull(beschreibung);
+        this.argumente = Objects.requireNonNull(argumente);
+        this.programm = Objects.requireNonNull(programm);
     }
 
     public static Modus findeModus(String[] eingaben) {
-        if (eingaben == null) {
-            throw new IllegalArgumentException("Eingaben dürfen nicht null sein");
-        }
+        Objects.requireNonNull(eingaben);
         if (eingaben.length == 0) {
             return HILFE;
         }
@@ -50,9 +44,7 @@ public enum Modus {
     }
 
     public boolean entsprichtEingaben(String[] eingaben) {
-        if (eingaben == null) {
-            throw new IllegalArgumentException("Eingaben dürfen nicht null sein");
-        }
+        Objects.requireNonNull(eingaben);
         if (eingaben.length == 0) {
             return false;
         }

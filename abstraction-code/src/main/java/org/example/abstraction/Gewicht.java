@@ -23,19 +23,19 @@ public record Gewicht(long milligramm) {
         return new Gewicht(Math.multiplyExact(tonnen, 1_000_000_000));
     }
 
-    public long toMilligramm() {
+    public long inMilligramm() {
         return milligramm;
     }
 
-    public long toGramm() {
+    public long inGramm() {
         return milligramm / 1_000;
     }
 
-    public long toKilogramm() {
+    public long inKilogramm() {
         return milligramm / 1_000_000;
     }
 
-    public long toTonnen() {
+    public long inTonnen() {
         return milligramm / 1_000_000_000;
     }
 }

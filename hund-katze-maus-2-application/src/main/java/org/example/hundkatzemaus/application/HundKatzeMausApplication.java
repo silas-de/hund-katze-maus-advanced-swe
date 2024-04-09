@@ -1,7 +1,5 @@
 package org.example.hundkatzemaus.application;
 
-import java.util.Optional;
-
 public enum HundKatzeMausApplication {
     instance;
 
