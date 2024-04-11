@@ -59,4 +59,8 @@ public class Tierart {
         }
         return this.equals(tierart) || gehörtZuOberart(tierart.oberArt);
     }
+
+    public String getName() {
+        return name;
+    }
 }

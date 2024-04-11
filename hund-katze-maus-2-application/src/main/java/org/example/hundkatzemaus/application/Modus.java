@@ -14,6 +14,7 @@ public enum Modus {
     HILFE("Hilfe bei der Bedienung", new Argument[] { new FestesArgument("hilfe", "h") }, ProgrammHilfe.instance ),
     PFLEGE_ERFASSEN("Eine Pflegemaßnahme erfassen", new Argument[] { new FestesArgument("pflege-erfassen", "p") }, ProgrammHilfe.instance ),
     FÜTTERUNG_ERFASSEN("Eine Fütterung erfassen", new Argument[] { new FestesArgument("fütterung-erfassen", "f") }, ProgrammHilfe.instance ),
+    TIERE_ÜBERSICHT("Übersicht über alle Tiere anzeigen", new Argument[] { new FestesArgument("tier-übersicht", "t") }, ProgrammTiereÜbersicht.instance ),
     ;
 
     private final String beschreibung;

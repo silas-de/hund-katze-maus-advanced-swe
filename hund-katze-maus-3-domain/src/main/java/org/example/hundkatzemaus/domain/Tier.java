@@ -15,4 +15,8 @@ public class Tier {
     public static Tier aufnehmen(Tierart tierart) {
         return new Tier(UUID.randomUUID(), tierart);
     }
+
+    public Tierart getTierart() {
+        return tierart;
+    }
 }
