@@ -5,5 +5,5 @@ import java.util.UUID;
 
 public interface KrankenakteRepository {
     void speichere(Krankenakte krankenakte);
-    Optional<Krankenakte> findeFür(UUID tierId);
+    Optional<Krankenakte> findeFür(Tier tier);
 }

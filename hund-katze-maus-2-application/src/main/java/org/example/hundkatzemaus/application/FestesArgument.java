@@ -20,7 +20,7 @@ class FestesArgument implements Argument {
         if (eingabe.startsWith("--") && eingabe.substring(2).equals(name)) {
             return true;
         }
-        return alias != null && eingabe.startsWith("-") && eingabe.substring(1).equals(alias);
+        return eingabe.startsWith("-") && eingabe.substring(1).equals(alias);
     }
 
     public String getDokumentation() {

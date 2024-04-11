@@ -10,7 +10,7 @@ public enum Modus {
             return true;
         }
     } }, ProgrammHilfe.instance ),
-    FÜTTERUNGSPLAN_ANZEIGEN("heute anstehende Fütterungen anzeigen", new Argument[] { new FestesArgument("fütterungsplan", "fp") }, ProgrammHilfe.instance ),
+    FÜTTERUNGSPLAN_ANZEIGEN("Heute anstehende Fütterungen anzeigen", new Argument[] { new FestesArgument("fütterungsplan", "fp") }, ProgrammHilfe.instance ),
     HILFE("Hilfe bei der Bedienung", new Argument[] { new FestesArgument("hilfe", "h") }, ProgrammHilfe.instance ),
     PFLEGE_ERFASSEN("Eine Pflegemaßnahme erfassen", new Argument[] { new FestesArgument("pflege-erfassen", "p") }, ProgrammHilfe.instance ),
     FÜTTERUNG_ERFASSEN("Eine Fütterung erfassen", new Argument[] { new FestesArgument("fütterung-erfassen", "f") }, ProgrammHilfe.instance ),
@@ -65,6 +65,7 @@ public enum Modus {
             dokumentation.append(argument.getDokumentation());
             dokumentation.append(" ");
         }
+        dokumentation.append("\t\t");
         dokumentation.append(beschreibung);
         return dokumentation.toString();
     }

@@ -38,31 +38,19 @@ public class Tierart {
     }
 
     private void unterartZuordnen(Tierart unterArt) {
-        if (unterArt == null) {
-            throw new IllegalArgumentException("Unterart darf nicht null sein");
-        }
-        unterArten.add(unterArt);
+        unterArten.add(Objects.requireNonNull(unterArt));
     }
 
     public void mitAttribut(TierartAttribut attribut) {
-        if (attribut == null) {
-            throw new IllegalArgumentException("Attribut darf nicht null sein");
-        }
-        attribute.add(attribut);
+        attribute.add(Objects.requireNonNull(attribut));
     }
 
     public void mitFutter(String futter) {
-        if (futter == null) {
-            throw new IllegalArgumentException("Futter darf nicht null sein");
-        }
-        this.futter.add(futter);
+        this.futter.add(Objects.requireNonNull(futter));
     }
 
     public void mitBesonderheit(String besonderheit) {
-        if (besonderheit == null) {
-            throw new IllegalArgumentException("Besonderheit darf nicht null sein");
-        }
-        besonderheiten.add(besonderheit);
+        besonderheiten.add(Objects.requireNonNull(besonderheit));
     }
 
     public boolean gehörtZuOberart(Tierart tierart) {

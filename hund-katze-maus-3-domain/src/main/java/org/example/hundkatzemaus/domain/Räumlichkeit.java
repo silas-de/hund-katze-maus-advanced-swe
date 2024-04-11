@@ -3,7 +3,9 @@ package org.example.hundkatzemaus.domain;
 import org.example.abstraction.Gewicht;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 public class Räumlichkeit extends Standort {
     private final Kennzeichnung kennzeichnung;
@@ -11,18 +13,16 @@ public class Räumlichkeit extends Standort {
     private final Gewicht kapazitätGewicht;
     private final int kapazitätAnzahl;
 
-    public Räumlichkeit(Kennzeichnung kennzeichnung, Gewicht kapazitätGewicht, int kapazitätAnzahl) {
-        this.kennzeichnung = kennzeichnung;
+    public Räumlichkeit(UUID id, Kennzeichnung kennzeichnung, Gewicht kapazitätGewicht, int kapazitätAnzahl) {
+        super(id);
+        this.kennzeichnung = Objects.requireNonNull(kennzeichnung);
         this.tierarten = new HashSet<>();
-        this.kapazitätGewicht = kapazitätGewicht;
+        this.kapazitätGewicht = Objects.requireNonNull(kapazitätGewicht);
         this.kapazitätAnzahl = kapazitätAnzahl;
     }
 
     public void fürTierart(Tierart tierart) {
-        if (tierart == null) {
-            throw new IllegalArgumentException("Tierart darf nicht null sein");
-        }
-        tierarten.add(tierart);
+        tierarten.add(Objects.requireNonNull(tierart));
     }
 
     public boolean istFürTierart(Tierart tierart) {

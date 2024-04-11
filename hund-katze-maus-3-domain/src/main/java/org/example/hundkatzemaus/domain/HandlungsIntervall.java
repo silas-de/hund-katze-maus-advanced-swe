@@ -18,10 +18,7 @@ public class HandlungsIntervall {
     }
 
     public void zurUhrzeit(LocalTime uhrzeit) {
-        if (uhrzeit == null) {
-            throw new IllegalArgumentException("Uhrzeit darf nicht null sein");
-        }
-        uhrzeiten.add(uhrzeit);
+        uhrzeiten.add(Objects.requireNonNull(uhrzeit));
     }
 
     public Set<LocalTime> getUhrzeiten() {

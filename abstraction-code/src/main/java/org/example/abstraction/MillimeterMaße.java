@@ -19,17 +19,17 @@ public record MillimeterMaße(Long breite, Long höhe, Long tiefe) {
     public static class Builder {
         private Long breite, höhe, tiefe;
 
-        public Builder breite(Long breite) {
+        public Builder breite(long breite) {
             this.breite = breite;
             return this;
         }
 
-        public Builder höhe(Long höhe) {
+        public Builder höhe(long höhe) {
             this.höhe = höhe;
             return this;
         }
 
-        public Builder tiefe(Long tiefe) {
+        public Builder tiefe(long tiefe) {
             this.tiefe = tiefe;
             return this;
         }

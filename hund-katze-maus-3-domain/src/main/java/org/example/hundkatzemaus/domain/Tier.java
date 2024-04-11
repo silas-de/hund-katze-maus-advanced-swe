@@ -1,5 +1,6 @@
 package org.example.hundkatzemaus.domain;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Tier {
@@ -7,8 +8,8 @@ public class Tier {
     private Tierart tierart;
 
     public Tier(UUID id, Tierart tierart) {
-        this.id = id;
-        this.tierart = tierart;
+        this.id = Objects.requireNonNull(id);
+        this.tierart = Objects.requireNonNull(tierart);
     }
 
     public static Tier aufnehmen(Tierart tierart) {

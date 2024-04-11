@@ -16,7 +16,6 @@ public record Messung(UUID id, Gewicht gewicht, MillimeterMaße millimeterMaße,
         if (gewicht.inMilligramm() <= 0) {
             throw new IllegalArgumentException("Das Gewicht einer Messung darf nicht negativ sein.");
         }
-
     }
 
     public Messung(Gewicht gewicht, MillimeterMaße millimeterMaße, Date datum) {
