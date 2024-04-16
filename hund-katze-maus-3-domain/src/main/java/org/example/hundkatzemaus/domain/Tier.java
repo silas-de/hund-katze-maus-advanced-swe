@@ -4,4 +4,6 @@ public interface Tier {
     Tierart getTierart();
 
     Besitzer getBesitzer();
+
+    String fluktuation();
 }

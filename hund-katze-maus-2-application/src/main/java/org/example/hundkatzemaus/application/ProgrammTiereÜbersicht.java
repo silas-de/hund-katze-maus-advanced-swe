@@ -11,10 +11,10 @@ public enum ProgrammTiereÜbersicht implements Programm {
 
     @Override
     public void ausführen(String[] args) {
-        long anzahlTiere = TierRepository.instance.anzahlTiere();
+        long anzahlTiere = TierRepository.INSTANCE.anzahlTiere();
         System.out.println("Insgesamt " + anzahlTiere + " Tiere");
 
-        List<Tier> tiereZuletztAufgenommen = TierRepository.instance.aufgenommenInDenLetztenTagen(7);
+        List<Tier> tiereZuletztAufgenommen = TierRepository.INSTANCE.aufgenommenInDenLetztenTagen(7);
         System.out.println("Neu aufgenommen in den letzten 7 Tagen: " + tiereZuletztAufgenommen.size() + " Tiere");
         tiereZuletztAufgenommen.stream()
                 .collect(Collectors.groupingBy(Tier::getTierart))

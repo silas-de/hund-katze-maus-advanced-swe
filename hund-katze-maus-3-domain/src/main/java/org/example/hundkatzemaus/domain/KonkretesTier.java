@@ -24,4 +24,9 @@ public class KonkretesTier implements Tier {
     public Besitzer getBesitzer() {
         return BesitzerNiemand.NIEMAND;
     }
+
+    @Override
+    public String fluktuation() {
+        return "Ende.";
+    }
 }

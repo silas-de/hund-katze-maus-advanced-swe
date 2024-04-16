@@ -4,5 +4,8 @@ import java.util.List;
 
 public interface TierRepository {
     long anzahlTiere();
+
     List<Tier> aufgenommenInDenLetztenTagen(int tage);
+
+    List<Tier> fluktuationInDenLetztenTagen(int tage);
 }

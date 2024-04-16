@@ -5,7 +5,9 @@ import org.example.hundkatzemaus.domain.Tier;
 
 import java.util.Optional;
 
-public class MessverlaufRepository implements org.example.hundkatzemaus.domain.MessverlaufRepository {
+public enum MessverlaufRepository implements org.example.hundkatzemaus.domain.MessverlaufRepository {
+    INSTANCE;
+    
     @Override
     public Optional<Messverlauf> findeVon(Tier tier) {
         return Optional.empty();

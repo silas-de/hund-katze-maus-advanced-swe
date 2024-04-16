@@ -5,7 +5,7 @@ import org.example.hundkatzemaus.domain.Tier;
 import java.util.List;
 
 public enum TierRepository implements org.example.hundkatzemaus.domain.TierRepository {
-    instance;
+    INSTANCE;
 
     @Override
     public long anzahlTiere() {
@@ -14,6 +14,11 @@ public enum TierRepository implements org.example.hundkatzemaus.domain.TierRepos
 
     @Override
     public List<Tier> aufgenommenInDenLetztenTagen(int tage) {
+        return List.of();
+    }
+
+    @Override
+    public List<Tier> fluktuationInDenLetztenTagen(int tage) {
         return List.of();
     }
 }

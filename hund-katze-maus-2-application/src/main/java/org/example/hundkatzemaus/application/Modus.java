@@ -15,6 +15,7 @@ public enum Modus {
     PFLEGE_ERFASSEN("Eine Pflegemaßnahme erfassen", new Argument[]{new FestesArgument("pflege-erfassen", "p")}, ProgrammHilfe.INSTANCE),
     FÜTTERUNG_ERFASSEN("Eine Fütterung erfassen", new Argument[]{new FestesArgument("fütterung-erfassen", "f")}, ProgrammHilfe.INSTANCE),
     TIERE_ÜBERSICHT("Übersicht über alle Tiere anzeigen", new Argument[]{new FestesArgument("tier-übersicht", "t")}, ProgrammTiereÜbersicht.INSTANCE),
+    FLUKTUATION_ANZEIGEN("Fluktuation der Tiere anzeigen", new Argument[]{}, ProgrammFluktuation.INSTANCE),
     ;
 
     private final String beschreibung;

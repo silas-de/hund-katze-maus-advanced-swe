@@ -15,4 +15,9 @@ public abstract class TierDekorierer implements Tier {
     public Tierart getTierart() {
         return tierVorher.getTierart();
     }
+
+    @Override
+    public String fluktuation() {
+        return ereignisBeschreibung() + " - " + tierVorher.fluktuation();
+    }
 }
