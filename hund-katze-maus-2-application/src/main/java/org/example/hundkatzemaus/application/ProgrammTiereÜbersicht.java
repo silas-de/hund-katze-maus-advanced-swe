@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum ProgrammTiereÜbersicht implements Programm {
-    instance;
+    INSTANCE;
 
     @Override
     public void ausführen(String[] args) {

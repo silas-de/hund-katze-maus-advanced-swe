@@ -1,7 +1,7 @@
 package org.example.hundkatzemaus.application;
 
 public enum ProgrammHilfe implements Programm {
-    instance;
+    INSTANCE;
 
     @Override
     public void ausführen(String[] args) {

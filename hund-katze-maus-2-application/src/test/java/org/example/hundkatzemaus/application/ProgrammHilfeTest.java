@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProgrammHilfeTest {
-    private final ByteArrayOutputStream abgefangeneKonsolenAusgabe = new ByteArrayOutputStream();
     private static final PrintStream systemAusgabe = System.out;
+    private final ByteArrayOutputStream abgefangeneKonsolenAusgabe = new ByteArrayOutputStream();
 
     @org.junit.jupiter.api.BeforeEach
     public void konsolenAusgabeEinrichten() {
@@ -25,7 +25,7 @@ class ProgrammHilfeTest {
     void ersteZeile() {
         String ersteZeile = "Benutzung:";
 
-        ProgrammHilfe.instance.ausführen(new String[]{});
+        ProgrammHilfe.INSTANCE.ausführen(new String[]{});
         Optional<String> geleseneErsteZeile = abgefangeneKonsolenAusgabe.toString().lines().findFirst();
 
         assertTrue(geleseneErsteZeile.isPresent());
@@ -36,7 +36,7 @@ class ProgrammHilfeTest {
     void zeilenAnzahl() {
         long zeilenAnzahl = 8;
 
-        ProgrammHilfe.instance.ausführen(new String[]{});
+        ProgrammHilfe.INSTANCE.ausführen(new String[]{});
 
         assertEquals(zeilenAnzahl, abgefangeneKonsolenAusgabe.toString().lines().count());
     }

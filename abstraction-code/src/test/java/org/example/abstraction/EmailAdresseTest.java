@@ -1,6 +1,7 @@
 package org.example.abstraction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmailAdresseTest {
     @org.junit.jupiter.api.Test
@@ -38,7 +39,7 @@ class EmailAdresseTest {
     void nullEmailAdresse() {
         String email = null;
 
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email));
+        assertThrows(NullPointerException.class, () -> new EmailAdresse(email));
     }
 
     @org.junit.jupiter.api.Test
