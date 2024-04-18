@@ -17,7 +17,7 @@ public class HandlungsIntervall {
         this.tageDazwischen = tageDazwischen;
     }
 
-    public void zurUhrzeit(LocalTime uhrzeit) {
+    public void um(LocalTime uhrzeit) {
         uhrzeiten.add(Objects.requireNonNull(uhrzeit));
     }
 

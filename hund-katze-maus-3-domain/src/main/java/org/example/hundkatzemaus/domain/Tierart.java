@@ -45,6 +45,10 @@ public class Tierart {
         attribute.add(Objects.requireNonNull(attribut));
     }
 
+    public void ohneAttribut(TierartAttribut attribut) {
+        attribute.remove(Objects.requireNonNull(attribut));
+    }
+
     public void mitFutter(String futter) {
         this.futter.add(Objects.requireNonNull(futter));
     }
@@ -62,5 +66,45 @@ public class Tierart {
 
     public String getName() {
         return name;
+    }
+
+    public static class Builder {
+        private UUID id;
+        private String name;
+        private HandlungsIntervall fütterungsIntervall;
+        private HandlungsIntervall untersuchungsIntervall;
+        private Tierart oberArt;
+
+        public Builder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder fütterungsIntervall(HandlungsIntervall fütterungsIntervall) {
+            this.fütterungsIntervall = fütterungsIntervall;
+            return this;
+        }
+
+        public Builder untersuchungsIntervall(HandlungsIntervall untersuchungsIntervall) {
+            this.untersuchungsIntervall = untersuchungsIntervall;
+            return this;
+        }
+
+        public Builder oberArt(Tierart oberArt) {
+            this.oberArt = oberArt;
+            return this;
+        }
+
+        public Tierart build() {
+            if (id == null) {
+                id = UUID.randomUUID();
+            }
+            return new Tierart(id, name, fütterungsIntervall, untersuchungsIntervall, oberArt);
+        }
     }
 }
