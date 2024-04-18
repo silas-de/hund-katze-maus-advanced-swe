@@ -8,42 +8,39 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalTime;
+import java.util.Optional;
 
 public enum ProgrammTierartHinzufügen implements Programm {
     INSTANCE;
 
     @Override
     public void ausführen(String[] args) {
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(System.in))) {
-
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Tierart hinzufügen");
-            System.out.print("Name: ");
-            String name = reader.readLine();
+            Optional<String> name = Dialog.textFrageStellen("Name:", false, reader);
+            if (name.isEmpty())
+                System.exit(1);
 
-            System.out.print("Ist das Tier exotisch? [j/n]: ");
-            String exotisch = reader.readLine();
-            System.out.print("Ist das Tier heimisch? [j/n]: ");
-            String heimisch = reader.readLine();
-            System.out.print("Ist das Tier wild? [j/n]: ");
-            String wild = reader.readLine();
+            boolean exotisch = tierartAttributErfragen("exotisch", reader);
+            boolean heimisch = tierartAttributErfragen("heimisch", reader);
+            boolean wild = tierartAttributErfragen("wild", reader);
 
-            System.out.print("Tiere dieser Art werden üblicherweise alle [...] Tage gefüttert: ");
-            int fütterungsintervallTage = Integer.parseInt(reader.readLine());
-            System.out.print("Wie oft wird diese Art an jedem Fütterungstag gefüttert? ");
+            int fütterungsintervallTage = Dialog.nichtnegativeGanzzahlErfragen("Tiere dieser Art werden üblicherweise alle [...] Tage gefüttert:", reader);
+            if (fütterungsintervallTage == -1)
+                System.exit(1);
             HandlungsIntervall fütterungsIntervall = new HandlungsIntervall(fütterungsintervallTage);
-            int fütterungsintervallHäufigkeit = Integer.parseInt(reader.readLine());
+            int fütterungsintervallHäufigkeit = Dialog.nichtnegativeGanzzahlErfragen("Wie oft wird diese Art am Tag gefüttert?", reader);
+            if (fütterungsintervallHäufigkeit == -1)
+                System.exit(1);
             for (int i = 0; i < fütterungsintervallHäufigkeit; i++) {
                 System.out.print("Uhrzeit der Fütterung (hh:mm): ");
                 String uhrzeit = reader.readLine();
                 fütterungsIntervall.um(LocalTime.parse(uhrzeit));
             }
 
-            System.out.print("Tiere dieser Art werden üblicherweise alle [...] Tage untersucht: ");
-            int untersuchungsintervallTage = Integer.parseInt(reader.readLine());
-            System.out.print("Wie oft wird diese Art an jedem Untersuchungstag untersucht? ");
+            int untersuchungsintervallTage = Dialog.nichtnegativeGanzzahlErfragen("Tiere dieser Art werden üblicherweise alle [...] Tage untersucht:", reader);
             HandlungsIntervall untersuchungsIntervall = new HandlungsIntervall(untersuchungsintervallTage);
-            int untersuchungsintervallHäufigkeit = Integer.parseInt(reader.readLine());
+            int untersuchungsintervallHäufigkeit = Dialog.nichtnegativeGanzzahlErfragen("Wie oft wird diese Art an jedem Untersuchungstag untersucht?", reader);
             for (int i = 0; i < untersuchungsintervallHäufigkeit; i++) {
                 System.out.print("Uhrzeit der Untersuchung (hh:mm): ");
                 String uhrzeit = reader.readLine();
@@ -51,23 +48,26 @@ public enum ProgrammTierartHinzufügen implements Programm {
             }
 
             Tierart tierart = new Tierart.Builder()
-                    .name(name)
+                    .name(name.get())
                     .fütterungsIntervall(fütterungsIntervall)
                     .untersuchungsIntervall(untersuchungsIntervall)
                     .build();
-            if ("j".equals(exotisch) || "J".equals(exotisch)) {
+            if (exotisch)
                 tierart.mitAttribut(TierartAttribut.EXOTISCH);
-            }
-            if ("j".equals(heimisch) || "J".equals(heimisch)) {
+            if (heimisch)
                 tierart.mitAttribut(TierartAttribut.HEIMISCH);
-            }
-            if ("j".equals(wild) || "J".equals(wild)) {
+            if (wild)
                 tierart.mitAttribut(TierartAttribut.WILD);
-            }
+
             TierartRepository tierartRepository = new TierartRepository();
             tierartRepository.registriere(tierart);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean tierartAttributErfragen(String attributName, BufferedReader reader) {
+        Optional<Boolean> exotisch = Dialog.jaNeinFrageStellen("Ist das Tier " + attributName + "?", reader);
+        return exotisch.orElse(false);
     }
 }
