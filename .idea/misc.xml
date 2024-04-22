@@ -1,22 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/abstraction-code/pom.xml" />
-        <option value="$PROJECT_DIR$/hund-katze-maus-x/pom.xml" />
         <option value="$PROJECT_DIR$/hund-katze-maus-3-domain/pom.xml" />
-        <option value="$PROJECT_DIR$/hund-katze-maus-1-adapters/pom.xml" />
         <option value="$PROJECT_DIR$/hund-katze-maus-2-application/pom.xml" />
-        <option value="$PROJECT_DIR$/hund-katze-maus-0-plugin-database/pom.xml" />
-        <option value="$PROJECT_DIR$/hund-katze-maus-main/pom.xml" />
-      </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/hund-katze-maus-0-plugin-database/pom.xml" />
         <option value="$PROJECT_DIR$/hund-katze-maus-1-adapters/pom.xml" />
-      </set>
+        <option value="$PROJECT_DIR$/hund-katze-maus-main/pom.xml" />
+        <option value="$PROJECT_DIR$/hund-katze-maus-x/pom.xml" />
+      </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">

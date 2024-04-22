@@ -1,6 +1,5 @@
 package org.example.hundkatzemaus.application;
 
-import org.example.hundkatzemaus.adapters.SystemKonsole;
 import org.example.hundkatzemaus.domain.HandlungsIntervall;
 import org.example.hundkatzemaus.domain.Tierart;
 import org.example.hundkatzemaus.domain.TierartAttribut;
@@ -12,7 +11,7 @@ public enum ProgrammTierartHinzufügen implements Programm {
     INSTANCE;
 
     @Override
-    public void ausführen(String[] args, SystemKonsole konsole) {
+    public void ausführen(String[] args, Konsole konsole) {
         try {
             System.out.println("Tierart hinzufügen");
             String name;
@@ -80,7 +79,7 @@ public enum ProgrammTierartHinzufügen implements Programm {
         }
     }
 
-    private static boolean tierartAttributErfragen(String attributName, SystemKonsole konsole) {
+    private static boolean tierartAttributErfragen(String attributName, Konsole konsole) {
         try {
             return Dialog.jaNeinFrageStellen("Ist das Tier " + attributName + "?", konsole);
         } catch (Dialog.EingabeException | IOException e) {

@@ -6,7 +6,7 @@ public enum ProgrammHilfe implements Programm {
     INSTANCE;
 
     @Override
-    public void ausführen(String[] args, SystemKonsole konsole) {
+    public void ausführen(String[] args, Konsole konsole) {
         System.out.println("Benutzung:");
         for (Modus modus : Modus.values()) {
             System.out.println(modus.getDokumentation());

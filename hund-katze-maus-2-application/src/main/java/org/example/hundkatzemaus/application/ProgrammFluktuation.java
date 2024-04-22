@@ -9,7 +9,7 @@ public enum ProgrammFluktuation implements Programm {
     INSTANCE;
 
     @Override
-    public void ausführen(String[] eingaben, SystemKonsole konsole) {
+    public void ausführen(String[] eingaben, Konsole konsole) {
         System.out.println("Fluktuation der letzten 7 Tage:");
         List<Tier> veränderteTiere = TierRepository.INSTANCE.fluktuationInDenLetztenTagen(7);
         for (Tier tier : veränderteTiere) {

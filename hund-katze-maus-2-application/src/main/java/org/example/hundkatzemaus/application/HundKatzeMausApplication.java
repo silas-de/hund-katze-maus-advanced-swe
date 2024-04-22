@@ -1,15 +1,13 @@
 package org.example.hundkatzemaus.application;
 
-import org.example.hundkatzemaus.adapters.SystemKonsole;
-
 import java.io.Closeable;
 import java.io.IOException;
 
 public class HundKatzeMausApplication implements Closeable {
-    private final SystemKonsole konsole;
+    private final Konsole konsole;
 
-    public HundKatzeMausApplication() {
-        this.konsole = new SystemKonsole();
+    public HundKatzeMausApplication(Konsole konsole) {
+        this.konsole = konsole;
     }
 
     public void run(String[] args) {

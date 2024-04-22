@@ -1,7 +1,5 @@
 package org.example.hundkatzemaus.application;
 
-import org.example.hundkatzemaus.adapters.SystemKonsole;
-
 import java.io.IOException;
 
 public class Dialog {
@@ -11,7 +9,7 @@ public class Dialog {
         }
     }
 
-    public static boolean jaNeinFrageStellen(String frage, SystemKonsole konsole) throws EingabeException, IOException {
+    public static boolean jaNeinFrageStellen(String frage, Konsole konsole) throws EingabeException, IOException {
         konsole.ausgeben(frage + " [j/n]: ");
         String antwort = konsole.einlesen();
         if ("j".equals(antwort) || "J".equals(antwort)) {
@@ -23,7 +21,7 @@ public class Dialog {
         }
     }
 
-    public static String textFrageStellen(String frage, boolean darfLeerSein, SystemKonsole konsole) throws EingabeException, IOException {
+    public static String textFrageStellen(String frage, boolean darfLeerSein, Konsole konsole) throws EingabeException, IOException {
         konsole.ausgeben(frage + " ");
         String antwort = konsole.einlesen();
         if (darfLeerSein || !antwort.isEmpty()) {
@@ -33,7 +31,7 @@ public class Dialog {
         }
     }
 
-    public static int nichtnegativeGanzzahlErfragen(String frage, SystemKonsole konsole) throws EingabeException, IOException {
+    public static int nichtnegativeGanzzahlErfragen(String frage, Konsole konsole) throws EingabeException, IOException {
         konsole.ausgeben(frage + " ");
         try {
             int zahl = Integer.parseInt(konsole.einlesen());

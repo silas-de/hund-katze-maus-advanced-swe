@@ -11,7 +11,7 @@ public enum ProgrammTiereÜbersicht implements Programm {
     INSTANCE;
 
     @Override
-    public void ausführen(String[] args, SystemKonsole konsole) {
+    public void ausführen(String[] args, Konsole konsole) {
         long anzahlTiere = TierRepository.INSTANCE.anzahlTiere();
         System.out.println("Insgesamt " + anzahlTiere + " Tiere");
 

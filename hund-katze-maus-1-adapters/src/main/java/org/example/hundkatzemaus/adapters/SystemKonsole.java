@@ -1,8 +1,10 @@
 package org.example.hundkatzemaus.adapters;
 
+import org.example.hundkatzemaus.application.Konsole;
+
 import java.io.*;
 
-public class SystemKonsole implements Closeable {
+public class SystemKonsole implements Konsole {
     private static final PrintStream ausgabe = System.out;
     private static final BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
 
