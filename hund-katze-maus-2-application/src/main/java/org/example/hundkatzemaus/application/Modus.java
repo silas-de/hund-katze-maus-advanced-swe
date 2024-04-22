@@ -1,5 +1,7 @@
 package org.example.hundkatzemaus.application;
 
+import org.example.hundkatzemaus.adapters.SystemKonsole;
+
 import java.util.Objects;
 
 public enum Modus {
@@ -42,8 +44,8 @@ public enum Modus {
         return HILFE;
     }
 
-    public void ausführen(String[] eingaben) {
-        programm.ausführen(eingaben);
+    public void ausführen(String[] eingaben, SystemKonsole konsole) {
+        programm.ausführen(eingaben, konsole);
     }
 
     public boolean entsprichtEingaben(String[] eingaben) {

@@ -1,6 +1,7 @@
 package org.example.hundkatzemaus.application;
 
-import java.io.BufferedReader;
+import org.example.hundkatzemaus.adapters.SystemKonsole;
+
 import java.io.IOException;
 
 public class Dialog {
@@ -10,9 +11,9 @@ public class Dialog {
         }
     }
 
-    public static boolean jaNeinFrageStellen(String frage, BufferedReader reader) throws EingabeException, IOException {
-        System.out.print(frage + " [j/n]: ");
-        String antwort = reader.readLine();
+    public static boolean jaNeinFrageStellen(String frage, SystemKonsole konsole) throws EingabeException, IOException {
+        konsole.ausgeben(frage + " [j/n]: ");
+        String antwort = konsole.einlesen();
         if ("j".equals(antwort) || "J".equals(antwort)) {
             return true;
         } else if ("n".equals(antwort) || "N".equals(antwort)) {
@@ -22,9 +23,9 @@ public class Dialog {
         }
     }
 
-    public static String textFrageStellen(String frage, boolean darfLeerSein, BufferedReader reader) throws EingabeException, IOException {
-        System.out.print(frage + " ");
-        String antwort = reader.readLine();
+    public static String textFrageStellen(String frage, boolean darfLeerSein, SystemKonsole konsole) throws EingabeException, IOException {
+        konsole.ausgeben(frage + " ");
+        String antwort = konsole.einlesen();
         if (darfLeerSein || !antwort.isEmpty()) {
             return antwort;
         } else {
@@ -32,10 +33,10 @@ public class Dialog {
         }
     }
 
-    public static int nichtnegativeGanzzahlErfragen(String frage, BufferedReader reader) throws EingabeException, IOException {
-        System.out.print(frage + " ");
+    public static int nichtnegativeGanzzahlErfragen(String frage, SystemKonsole konsole) throws EingabeException, IOException {
+        konsole.ausgeben(frage + " ");
         try {
-            int zahl = Integer.parseInt(reader.readLine());
+            int zahl = Integer.parseInt(konsole.einlesen());
             if (zahl >= 0) {
                 return zahl;
             } else {

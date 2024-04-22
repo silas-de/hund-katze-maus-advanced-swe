@@ -1,39 +1,38 @@
 package org.example.hundkatzemaus.application;
 
+import org.example.hundkatzemaus.adapters.SystemKonsole;
 import org.example.hundkatzemaus.domain.HandlungsIntervall;
 import org.example.hundkatzemaus.domain.Tierart;
 import org.example.hundkatzemaus.domain.TierartAttribut;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalTime;
 
 public enum ProgrammTierartHinzufügen implements Programm {
     INSTANCE;
 
     @Override
-    public void ausführen(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+    public void ausführen(String[] args, SystemKonsole konsole) {
+        try {
             System.out.println("Tierart hinzufügen");
             String name;
             try {
-                name = Dialog.textFrageStellen("Name:", false, reader);
+                name = Dialog.textFrageStellen("Name:", false, konsole);
             } catch (Dialog.EingabeException | IOException e) {
                 System.exit(1);
                 return;
             }
 
-            boolean exotisch = tierartAttributErfragen("exotisch", reader);
-            boolean heimisch = tierartAttributErfragen("heimisch", reader);
-            boolean wild = tierartAttributErfragen("wild", reader);
+            boolean exotisch = tierartAttributErfragen("exotisch", konsole);
+            boolean heimisch = tierartAttributErfragen("heimisch", konsole);
+            boolean wild = tierartAttributErfragen("wild", konsole);
 
             int fütterungsintervallTage, fütterungsintervallHäufigkeit;
             HandlungsIntervall fütterungsIntervall;
             try {
-                fütterungsintervallTage = Dialog.nichtnegativeGanzzahlErfragen("Tiere dieser Art werden üblicherweise alle [...] Tage gefüttert:", reader);
+                fütterungsintervallTage = Dialog.nichtnegativeGanzzahlErfragen("Tiere dieser Art werden üblicherweise alle [...] Tage gefüttert:", konsole);
                 fütterungsIntervall = new HandlungsIntervall(fütterungsintervallTage);
-                fütterungsintervallHäufigkeit = Dialog.nichtnegativeGanzzahlErfragen("Wie oft wird diese Art am Tag gefüttert?", reader);
+                fütterungsintervallHäufigkeit = Dialog.nichtnegativeGanzzahlErfragen("Wie oft wird diese Art am Tag gefüttert?", konsole);
             } catch (Dialog.EingabeException | IOException e) {
                 System.err.println("Bitte geben Sie eine positive Ganzzahl ein.");
                 System.exit(1);
@@ -41,16 +40,16 @@ public enum ProgrammTierartHinzufügen implements Programm {
             }
             for (int i = 0; i < fütterungsintervallHäufigkeit; i++) {
                 System.out.print("Uhrzeit der Fütterung (hh:mm): ");
-                String uhrzeit = reader.readLine();
+                String uhrzeit = konsole.einlesen();
                 fütterungsIntervall.um(LocalTime.parse(uhrzeit));
             }
 
             int untersuchungsintervallTage, untersuchungsintervallHäufigkeit;
             HandlungsIntervall untersuchungsIntervall;
             try {
-                untersuchungsintervallTage = Dialog.nichtnegativeGanzzahlErfragen("Tiere dieser Art werden üblicherweise alle [...] Tage untersucht:", reader);
+                untersuchungsintervallTage = Dialog.nichtnegativeGanzzahlErfragen("Tiere dieser Art werden üblicherweise alle [...] Tage untersucht:", konsole);
                 untersuchungsIntervall = new HandlungsIntervall(untersuchungsintervallTage);
-                untersuchungsintervallHäufigkeit = Dialog.nichtnegativeGanzzahlErfragen("Wie oft wird diese Art an jedem Untersuchungstag untersucht?", reader);
+                untersuchungsintervallHäufigkeit = Dialog.nichtnegativeGanzzahlErfragen("Wie oft wird diese Art an jedem Untersuchungstag untersucht?", konsole);
             } catch (Dialog.EingabeException | IOException e) {
                 System.err.println("Bitte geben Sie eine positive Ganzzahl ein.");
                 System.exit(1);
@@ -58,7 +57,7 @@ public enum ProgrammTierartHinzufügen implements Programm {
             }
             for (int i = 0; i < untersuchungsintervallHäufigkeit; i++) {
                 System.out.print("Uhrzeit der Untersuchung (hh:mm): ");
-                String uhrzeit = reader.readLine();
+                String uhrzeit = konsole.einlesen();
                 untersuchungsIntervall.um(LocalTime.parse(uhrzeit));
             }
 
@@ -81,9 +80,9 @@ public enum ProgrammTierartHinzufügen implements Programm {
         }
     }
 
-    private static boolean tierartAttributErfragen(String attributName, BufferedReader reader) {
+    private static boolean tierartAttributErfragen(String attributName, SystemKonsole konsole) {
         try {
-            return Dialog.jaNeinFrageStellen("Ist das Tier " + attributName + "?", reader);
+            return Dialog.jaNeinFrageStellen("Ist das Tier " + attributName + "?", konsole);
         } catch (Dialog.EingabeException | IOException e) {
             return false;
         }

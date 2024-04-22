@@ -1,5 +1,6 @@
 package org.example.hundkatzemaus.application;
 
+import org.example.hundkatzemaus.adapters.SystemKonsole;
 import org.example.hundkatzemaus.domain.Tier;
 
 import java.util.Comparator;
@@ -10,7 +11,7 @@ public enum ProgrammTiereÜbersicht implements Programm {
     INSTANCE;
 
     @Override
-    public void ausführen(String[] args) {
+    public void ausführen(String[] args, SystemKonsole konsole) {
         long anzahlTiere = TierRepository.INSTANCE.anzahlTiere();
         System.out.println("Insgesamt " + anzahlTiere + " Tiere");
 

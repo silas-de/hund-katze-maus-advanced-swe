@@ -1,7 +1,7 @@
 package org.example.hundkatzemaus.application;
 
-import java.io.PrintStream;
+import org.example.hundkatzemaus.adapters.SystemKonsole;
 
 public interface Programm {
-    void ausführen(String[] args);
+    void ausführen(String[] args, SystemKonsole konsole);
 }

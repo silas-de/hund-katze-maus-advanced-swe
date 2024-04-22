@@ -1,7 +1,8 @@
 package org.example.hundkatzemaus.application;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import org.example.hundkatzemaus.adapters.SystemKonsole;
+
+import java.io.*;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,7 +26,7 @@ class ProgrammHilfeTest {
     void ersteZeile() {
         String ersteZeile = "Benutzung:";
 
-        ProgrammHilfe.INSTANCE.ausführen(new String[]{});
+        ProgrammHilfe.INSTANCE.ausführen(new String[]{}, new SystemKonsole());
         Optional<String> geleseneErsteZeile = abgefangeneKonsolenAusgabe.toString().lines().findFirst();
 
         assertTrue(geleseneErsteZeile.isPresent());
@@ -36,7 +37,7 @@ class ProgrammHilfeTest {
     void zeilenAnzahl() {
         long zeilenAnzahl = 8;
 
-        ProgrammHilfe.INSTANCE.ausführen(new String[]{});
+        ProgrammHilfe.INSTANCE.ausführen(new String[]{}, new SystemKonsole());
 
         assertEquals(zeilenAnzahl, abgefangeneKonsolenAusgabe.toString().lines().count());
     }
