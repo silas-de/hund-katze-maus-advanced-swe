@@ -1,6 +1,5 @@
 package org.example.hundkatzemaus.application;
 
-import org.example.hundkatzemaus.adapters.SystemKonsole;
 import org.example.hundkatzemaus.domain.Tier;
 
 import java.util.Comparator;

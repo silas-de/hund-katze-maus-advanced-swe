@@ -1,15 +1,13 @@
 package org.example.hundkatzemaus.application;
 
-import org.example.hundkatzemaus.adapters.SystemKonsole;
-
 public enum ProgrammHilfe implements Programm {
     INSTANCE;
 
     @Override
     public void ausführen(String[] args, Konsole konsole) {
-        System.out.println("Benutzung:");
+        konsole.ausgeben("Benutzung:" + System.lineSeparator());
         for (Modus modus : Modus.values()) {
-            System.out.println(modus.getDokumentation());
+            konsole.ausgeben(modus.getDokumentation() + System.lineSeparator());
         }
     }
 }

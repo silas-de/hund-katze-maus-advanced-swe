@@ -1,74 +1,49 @@
 package org.example.hundkatzemaus.application;
 
+import org.mockito.Captor;
+import org.mockito.Mockito;
+import org.mockito.ArgumentCaptor;
+
 import java.io.*;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProgrammHilfeTest {
-    private static final PrintStream systemAusgabe = System.out;
-    private final ByteArrayOutputStream abgefangeneKonsolenAusgabe = new ByteArrayOutputStream();
+    @Captor
+    private ArgumentCaptor<String> ausgabeCaptor;
 
-    @org.junit.jupiter.api.BeforeEach
-    public void konsolenAusgabeEinrichten() {
-        System.setOut(new PrintStream(abgefangeneKonsolenAusgabe));
-    }
+    @org.junit.jupiter.api.Test
+    void ersteZeile() throws IOException {
+        // Arrange
+        String erwarteteErsteZeile = "Benutzung:" + System.lineSeparator();
 
-    @org.junit.jupiter.api.AfterEach
-    public void konsolenAusgabeZurücksetzen() {
-        System.setOut(systemAusgabe);
+        try (Konsole konsole = Mockito.mock(Konsole.class)) {
+            // Act
+            ProgrammHilfe.INSTANCE.ausführen(new String[]{}, konsole);
+
+            // Assert
+            Mockito.verify(konsole).ausgeben(erwarteteErsteZeile);
+        }
     }
 
     @org.junit.jupiter.api.Test
-    void ersteZeile() {
-        String ersteZeile = "Benutzung:";
+    void zeilenAnzahl() throws IOException {
+        // Arrange
+        int erwarteteZeilenAnzahl = 10;
 
-        ProgrammHilfe.INSTANCE.ausführen(new String[]{}, new Konsole() {
-            private static final PrintStream ausgabe = System.out;
-            private static final BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
+        // Act
+        int zeilenAnzahl;
+        try (Konsole konsole = Mockito.mock(Konsole.class)) {
+            ProgrammHilfe.INSTANCE.ausführen(new String[]{}, konsole);
+            ausgabeCaptor = ArgumentCaptor.forClass(String.class);
+            Mockito.verify(konsole, Mockito.atLeastOnce()).ausgeben(ausgabeCaptor.capture());
 
-            public void ausgeben(String text) {
-                ausgabe.println(text);
-            }
+            String ausgabe = String.join("", ausgabeCaptor.getAllValues());
+            String[] zeilen = ausgabe.split(System.lineSeparator());
+            zeilenAnzahl = zeilen.length;
+        }
 
-            public String einlesen() throws IOException {
-                return eingabe.readLine();
-            }
-
-            @Override
-            public void close() throws IOException {
-                eingabe.close();
-            }
-        });
-        Optional<String> geleseneErsteZeile = abgefangeneKonsolenAusgabe.toString().lines().findFirst();
-
-        assertTrue(geleseneErsteZeile.isPresent());
-        assertEquals(ersteZeile, geleseneErsteZeile.get());
-    }
-
-    @org.junit.jupiter.api.Test
-    void zeilenAnzahl() {
-        long zeilenAnzahl = 8;
-
-        ProgrammHilfe.INSTANCE.ausführen(new String[]{}, new Konsole() {
-            private static final PrintStream ausgabe = System.out;
-            private static final BufferedReader eingabe = new BufferedReader(new InputStreamReader(System.in));
-
-            public void ausgeben(String text) {
-                ausgabe.println(text);
-            }
-
-            public String einlesen() throws IOException {
-                return eingabe.readLine();
-            }
-
-            @Override
-            public void close() throws IOException {
-                eingabe.close();
-            }
-        });
-
-        assertEquals(zeilenAnzahl, abgefangeneKonsolenAusgabe.toString().lines().count());
+        // Assert
+        assertEquals(erwarteteZeilenAnzahl, zeilenAnzahl);
     }
 }
