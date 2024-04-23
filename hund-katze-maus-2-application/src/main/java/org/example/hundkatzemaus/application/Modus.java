@@ -1,29 +1,30 @@
 package org.example.hundkatzemaus.application;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public enum Modus {
-    BELEGUNG_ANZEIGEN("Belegung der Räumlichkeiten anzeigen", new Argument[]{new FestesArgument("belegung", "b")}, ProgrammHilfe.INSTANCE),
+    BELEGUNG_ANZEIGEN("Belegung der Räumlichkeiten anzeigen", new Argument[]{new FestesArgument("belegung", "b")}, () -> ProgrammHilfe.INSTANCE),
     BELEGUNG_ANZEIGEN_RAUM("Belegung einer Räumlichkeit anzeigen", new Argument[]{new FestesArgument("belegung", "b"), new EingabeArgument("Raumnummer") {
         @Override
         public boolean entsprichtEingabe(String eingabe) {
             return true;
         }
-    }}, ProgrammHilfe.INSTANCE),
-    FÜTTERUNGSPLAN_ANZEIGEN("Heute anstehende Fütterungen anzeigen", new Argument[]{new FestesArgument("fütterungsplan", "fp")}, ProgrammHilfe.INSTANCE),
-    HILFE("Hilfe bei der Bedienung", new Argument[]{new FestesArgument("hilfe", "h")}, ProgrammHilfe.INSTANCE),
-    PFLEGE_ERFASSEN("Eine Pflegemaßnahme erfassen", new Argument[]{new FestesArgument("pflege-erfassen", "p")}, ProgrammHilfe.INSTANCE),
-    FÜTTERUNG_ERFASSEN("Eine Fütterung erfassen", new Argument[]{new FestesArgument("fütterung-erfassen", "f")}, ProgrammHilfe.INSTANCE),
-    TIERE_ÜBERSICHT("Übersicht über alle Tiere anzeigen", new Argument[]{new FestesArgument("tier-übersicht", "t")}, ProgrammTiereÜbersicht.INSTANCE),
-    FLUKTUATION_ANZEIGEN("Fluktuation der Tiere anzeigen", new Argument[]{new FestesArgument("fluktuation", "fl")}, ProgrammFluktuation.INSTANCE),
-    TIERART_HINZUFÜGEN("Eine Tierart hinzufügen", new Argument[]{new FestesArgument("tierart-hinzufügen", "ta")}, ProgrammTierartHinzufügen.INSTANCE),
+    }}, () -> ProgrammHilfe.INSTANCE),
+    FÜTTERUNGSPLAN_ANZEIGEN("Heute anstehende Fütterungen anzeigen", new Argument[]{new FestesArgument("fütterungsplan", "fp")}, () -> ProgrammHilfe.INSTANCE),
+    HILFE("Hilfe bei der Bedienung", new Argument[]{new FestesArgument("hilfe", "h")}, () -> ProgrammHilfe.INSTANCE),
+    PFLEGE_ERFASSEN("Eine Pflegemaßnahme erfassen", new Argument[]{new FestesArgument("pflege-erfassen", "p")}, () -> ProgrammHilfe.INSTANCE),
+    FÜTTERUNG_ERFASSEN("Eine Fütterung erfassen", new Argument[]{new FestesArgument("fütterung-erfassen", "f")}, () -> ProgrammHilfe.INSTANCE),
+    TIERE_ÜBERSICHT("Übersicht über alle Tiere anzeigen", new Argument[]{new FestesArgument("tier-übersicht", "t")}, () -> new ProgrammTiereÜbersicht(TierRepository.INSTANCE)),
+    FLUKTUATION_ANZEIGEN("Fluktuation der Tiere anzeigen", new Argument[]{new FestesArgument("fluktuation", "fl")}, () -> ProgrammFluktuation.INSTANCE),
+    TIERART_HINZUFÜGEN("Eine Tierart hinzufügen", new Argument[]{new FestesArgument("tierart-hinzufügen", "ta")}, () -> ProgrammTierartHinzufügen.INSTANCE),
     ;
 
     private final String beschreibung;
     private final Argument[] argumente;
-    private final Programm programm;
+    private final Supplier<Programm> programm;
 
-    Modus(String beschreibung, Argument[] argumente, Programm programm) {
+    Modus(String beschreibung, Argument[] argumente, Supplier<Programm> programm) {
         this.beschreibung = Objects.requireNonNull(beschreibung);
         this.argumente = Objects.requireNonNull(argumente);
         this.programm = Objects.requireNonNull(programm);
@@ -43,7 +44,7 @@ public enum Modus {
     }
 
     public void ausführen(String[] eingaben, Konsole konsole) {
-        programm.ausführen(eingaben, konsole);
+        programm.get().ausführen(eingaben, konsole);
     }
 
     public boolean entsprichtEingaben(String[] eingaben) {

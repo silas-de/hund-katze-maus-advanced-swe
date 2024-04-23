@@ -1,16 +1,21 @@
 package org.example.hundkatzemaus.application;
 
+import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mockito;
-import org.mockito.ArgumentCaptor;
 
-import java.io.*;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProgrammHilfeTest {
     @Captor
     private ArgumentCaptor<String> ausgabeCaptor;
+
+    @org.junit.jupiter.api.BeforeEach
+    void setUp() {
+        ausgabeCaptor = null;
+    }
 
     @org.junit.jupiter.api.Test
     void ersteZeile() throws IOException {
