@@ -6,46 +6,57 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class EmailAdresseTest {
     @org.junit.jupiter.api.Test
     void gültigeEmailAdresse() {
+        // Arrange
         String email = "john-doe@hotmail.com";
 
+        // Act
         EmailAdresse emailAdresse = new EmailAdresse(email);
 
+        // Assert
         assertEquals("john-doe@hotmail.com", emailAdresse.email());
     }
 
     @org.junit.jupiter.api.Test
     void ungültigeEmailAdresse() {
-        String email1 = "john-doe@hotmail";
-        String email2 = "john-doe@hotmail.";
-        String email3 = "john-doe@123";
-        String email4 = "123";
-        String email5 = "@hotmail.com";
+        // Arrange
+        String emailOhneDomainendung = "john-doe@hotmail";
+        String emailOhneDomainendungMitPunkt = "john-doe@hotmail.";
+        String emailZahlStattDomain = "john-doe@123";
+        String nurDieZahl123 = "123";
+        String atZeichenUndDomain = "@hotmail.com";
 
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email1));
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email2));
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email3));
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email4));
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email5));
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(emailOhneDomainendung));
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(emailOhneDomainendungMitPunkt));
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(emailZahlStattDomain));
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(nurDieZahl123));
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(atZeichenUndDomain));
     }
 
     @org.junit.jupiter.api.Test
     void leereEmailAdresse() {
-        String email = "";
+        // Arrange
+        String leereEingabe = "";
 
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email));
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(leereEingabe));
     }
 
     @org.junit.jupiter.api.Test
     void nullEmailAdresse() {
-        String email = null;
+        // Arrange
+        String nullEmail = null;
 
-        assertThrows(NullPointerException.class, () -> new EmailAdresse(email));
+        // Act & Assert
+        assertThrows(NullPointerException.class, () -> new EmailAdresse(nullEmail));
     }
 
     @org.junit.jupiter.api.Test
     void emailAdresseMitLeerzeichen() {
-        String email = "john doe@gmail.com";
+        // Arrange
+        String emailMitLeerzeichen = "john doe@gmail.com";
 
-        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(email));
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> new EmailAdresse(emailMitLeerzeichen));
     }
 }

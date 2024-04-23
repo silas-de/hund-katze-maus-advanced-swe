@@ -5,14 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class GewichtTest {
     @org.junit.jupiter.api.Test
     void nullGramm() {
+        // Arrange
         long keinGewicht = 0;
 
+        // Act
         Gewicht gewicht = new Gewicht(keinGewicht);
         Gewicht milliGramm = Gewicht.milligramm(keinGewicht);
         Gewicht gramm = Gewicht.gramm(keinGewicht);
         Gewicht kilogramm = Gewicht.kilogramm(keinGewicht);
         Gewicht tonnen = Gewicht.tonnen(keinGewicht);
 
+        // Assert
         assertEquals(0, gewicht.inMilligramm());
         assertEquals(0, milliGramm.inMilligramm());
         assertEquals(0, gramm.inMilligramm());
@@ -22,8 +25,10 @@ class GewichtTest {
 
     @org.junit.jupiter.api.Test
     void negativeGramm() {
+        // Arrange
         long negativesGewicht = -1;
 
+        // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> new Gewicht(negativesGewicht));
         assertThrows(IllegalArgumentException.class, () -> Gewicht.milligramm(negativesGewicht));
         assertThrows(IllegalArgumentException.class, () -> Gewicht.gramm(negativesGewicht));
@@ -33,14 +38,17 @@ class GewichtTest {
 
     @org.junit.jupiter.api.Test
     void einheitenUmformung() {
+        // Arrange
         long tonnen = 589 * 1_000_000_000L;
         long kilogramm = 823 * 1_000_000L;
         long gramm = 690 * 1_000L;
         long milligramm = 717;
         long gesamtMilligramm = tonnen + kilogramm + gramm + milligramm;
 
+        // Act
         Gewicht gewicht = new Gewicht(gesamtMilligramm);
 
+        // Assert
         assertEquals(589, gewicht.inTonnen());
         assertEquals(589_823, gewicht.inKilogramm());
         assertEquals(589_823_690, gewicht.inGramm());
@@ -49,6 +57,7 @@ class GewichtTest {
 
     @org.junit.jupiter.api.Test
     void gleichheit() {
+        // Arrange
         Gewicht gewicht1 = new Gewicht(1_234_000);
         Gewicht gewicht2 = new Gewicht(1_234_000);
         Gewicht gewicht3 = Gewicht.milligramm(1_234_000);
@@ -56,6 +65,7 @@ class GewichtTest {
         Gewicht gewicht5 = Gewicht.kilogramm(1);
         Gewicht gewicht6 = Gewicht.milligramm(1_234_001);
 
+        // Act & Assert
         assertEquals(gewicht1, gewicht2);
         assertEquals(gewicht1, gewicht3);
         assertEquals(gewicht1, gewicht4);
