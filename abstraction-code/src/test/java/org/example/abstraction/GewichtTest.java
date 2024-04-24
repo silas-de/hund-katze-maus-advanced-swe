@@ -1,19 +1,21 @@
 package org.example.abstraction;
 
+import org.junit.jupiter.api.function.Executable;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GewichtTest {
     @org.junit.jupiter.api.Test
     void nullGramm() {
         // Arrange
-        long keinGewicht = 0;
+        long zahlNull = 0;
 
         // Act
-        Gewicht gewicht = new Gewicht(keinGewicht);
-        Gewicht milliGramm = Gewicht.milligramm(keinGewicht);
-        Gewicht gramm = Gewicht.gramm(keinGewicht);
-        Gewicht kilogramm = Gewicht.kilogramm(keinGewicht);
-        Gewicht tonnen = Gewicht.tonnen(keinGewicht);
+        Gewicht gewicht = new Gewicht(zahlNull);
+        Gewicht milliGramm = Gewicht.milligramm(zahlNull);
+        Gewicht gramm = Gewicht.gramm(zahlNull);
+        Gewicht kilogramm = Gewicht.kilogramm(zahlNull);
+        Gewicht tonnen = Gewicht.tonnen(zahlNull);
 
         // Assert
         assertEquals(0, gewicht.inMilligramm());
@@ -26,50 +28,63 @@ class GewichtTest {
     @org.junit.jupiter.api.Test
     void negativeGramm() {
         // Arrange
-        long negativesGewicht = -1;
+        long negativeZahl = -1;
 
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Gewicht(negativesGewicht));
-        assertThrows(IllegalArgumentException.class, () -> Gewicht.milligramm(negativesGewicht));
-        assertThrows(IllegalArgumentException.class, () -> Gewicht.gramm(negativesGewicht));
-        assertThrows(IllegalArgumentException.class, () -> Gewicht.kilogramm(negativesGewicht));
-        assertThrows(IllegalArgumentException.class, () -> Gewicht.tonnen(negativesGewicht));
+        // Act
+        Executable negativesGewichtErzeugen = () -> new Gewicht(negativeZahl);
+        Executable negativeMilligrammErzeugen = () -> Gewicht.milligramm(negativeZahl);
+        Executable negativeGrammErzeugen = () -> Gewicht.gramm(negativeZahl);
+        Executable negativeKilogrammErzeugen = () -> Gewicht.kilogramm(negativeZahl);
+        Executable negativeTonnenErzeugen = () -> Gewicht.tonnen(negativeZahl);
+
+        // Assert
+        assertThrows(IllegalArgumentException.class, negativesGewichtErzeugen);
+        assertThrows(IllegalArgumentException.class, negativeMilligrammErzeugen);
+        assertThrows(IllegalArgumentException.class, negativeGrammErzeugen);
+        assertThrows(IllegalArgumentException.class, negativeKilogrammErzeugen);
+        assertThrows(IllegalArgumentException.class, negativeTonnenErzeugen);
     }
 
     @org.junit.jupiter.api.Test
     void einheitenUmformung() {
         // Arrange
-        long tonnen = 589 * 1_000_000_000L;
-        long kilogramm = 823 * 1_000_000L;
-        long gramm = 690 * 1_000L;
-        long milligramm = 717;
-        long gesamtMilligramm = tonnen + kilogramm + gramm + milligramm;
+        long tonnenAnteil = 589 * 1_000_000_000L;
+        long kilogrammAnteil = 823 * 1_000_000L;
+        long grammAnteil = 690 * 1_000L;
+        long milligrammAnteil = 717;
+        long gesamtMilligrammWert = tonnenAnteil + kilogrammAnteil + grammAnteil + milligrammAnteil;
 
         // Act
-        Gewicht gewicht = new Gewicht(gesamtMilligramm);
+        Gewicht gesamtGewicht = new Gewicht(gesamtMilligrammWert);
 
         // Assert
-        assertEquals(589, gewicht.inTonnen());
-        assertEquals(589_823, gewicht.inKilogramm());
-        assertEquals(589_823_690, gewicht.inGramm());
-        assertEquals(589_823_690_717L, gewicht.inMilligramm());
+        assertEquals(589, gesamtGewicht.inTonnen());
+        assertEquals(589_823, gesamtGewicht.inKilogramm());
+        assertEquals(589_823_690, gesamtGewicht.inGramm());
+        assertEquals(589_823_690_717L, gesamtGewicht.inMilligramm());
     }
 
     @org.junit.jupiter.api.Test
     void gleichheit() {
         // Arrange
-        Gewicht gewicht1 = new Gewicht(1_234_000);
-        Gewicht gewicht2 = new Gewicht(1_234_000);
-        Gewicht gewicht3 = Gewicht.milligramm(1_234_000);
-        Gewicht gewicht4 = Gewicht.gramm(1_234);
-        Gewicht gewicht5 = Gewicht.kilogramm(1);
-        Gewicht gewicht6 = Gewicht.milligramm(1_234_001);
+        long milligrammWert = 1_234_000;
+        long gleicherGrammWert = 1_234;
+        long andererKilogrammWert = 1;
+        long andererMilligrammWert = 1_234_001;
 
-        // Act & Assert
-        assertEquals(gewicht1, gewicht2);
-        assertEquals(gewicht1, gewicht3);
-        assertEquals(gewicht1, gewicht4);
-        assertNotEquals(gewicht1, gewicht5);
-        assertNotEquals(gewicht1, gewicht6);
+        // Act
+        Gewicht originalGewicht = new Gewicht(milligrammWert);
+        Gewicht auchGewicht1234000 = new Gewicht(milligrammWert);
+        Gewicht gewicht1234000Millligramm = Gewicht.milligramm(milligrammWert);
+        Gewicht gewicht1234Gramm = Gewicht.gramm(gleicherGrammWert);
+        Gewicht anderesGewicht1Kilogramm = Gewicht.kilogramm(andererKilogrammWert);
+        Gewicht anderesGewicht1234001Milligramm = Gewicht.milligramm(andererMilligrammWert);
+
+        // Assert
+        assertEquals(originalGewicht, auchGewicht1234000);
+        assertEquals(originalGewicht, gewicht1234000Millligramm);
+        assertEquals(originalGewicht, gewicht1234Gramm);
+        assertNotEquals(originalGewicht, anderesGewicht1Kilogramm);
+        assertNotEquals(originalGewicht, anderesGewicht1234001Milligramm);
     }
 }

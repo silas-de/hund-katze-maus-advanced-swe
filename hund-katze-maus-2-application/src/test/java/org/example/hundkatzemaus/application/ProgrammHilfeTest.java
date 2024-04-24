@@ -35,20 +35,20 @@ class ProgrammHilfeTest {
     void zeilenAnzahl() throws IOException {
         // Arrange
         int erwarteteZeilenAnzahl = 10;
+        ausgabeCaptor = ArgumentCaptor.forClass(String.class);
 
         // Act
-        int zeilenAnzahl;
+        int gemesseneZeilenAnzahl;
         try (Konsole konsole = Mockito.mock(Konsole.class)) {
             ProgrammHilfe.INSTANCE.ausführen(new String[]{}, konsole);
-            ausgabeCaptor = ArgumentCaptor.forClass(String.class);
             Mockito.verify(konsole, Mockito.atLeastOnce()).ausgeben(ausgabeCaptor.capture());
 
             String ausgabe = String.join("", ausgabeCaptor.getAllValues());
-            String[] zeilen = ausgabe.split(System.lineSeparator());
-            zeilenAnzahl = zeilen.length;
+            String[] einzelneZeilen = ausgabe.split(System.lineSeparator());
+            gemesseneZeilenAnzahl = einzelneZeilen.length;
         }
 
         // Assert
-        assertEquals(erwarteteZeilenAnzahl, zeilenAnzahl);
+        assertEquals(erwarteteZeilenAnzahl, gemesseneZeilenAnzahl);
     }
 }
